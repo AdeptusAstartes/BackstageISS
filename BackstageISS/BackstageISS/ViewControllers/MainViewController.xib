@@ -20,14 +20,14 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsBuildings="NO" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k6o-3n-39d">
-                    <rect key="frame" x="0.0" y="44" width="414" height="773"/>
+                    <rect key="frame" x="0.0" y="44" width="414" height="758"/>
                 </mapView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tbQ-rd-Eca">
-                    <rect key="frame" x="15" y="817" width="384" height="45"/>
+                    <rect key="frame" x="15" y="812" width="384" height="50"/>
                     <constraints>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="GAX-yO-34t"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="GAX-yO-34t"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -36,7 +36,7 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="k6o-3n-39d" secondAttribute="trailing" id="5mq-eE-cTG"/>
-                <constraint firstItem="tbQ-rd-Eca" firstAttribute="top" secondItem="k6o-3n-39d" secondAttribute="bottom" id="5pI-lp-b3L"/>
+                <constraint firstItem="tbQ-rd-Eca" firstAttribute="top" secondItem="k6o-3n-39d" secondAttribute="bottom" constant="10" id="5pI-lp-b3L"/>
                 <constraint firstItem="tbQ-rd-Eca" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="Ip2-zC-3ly"/>
                 <constraint firstItem="k6o-3n-39d" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="bdA-hD-gah"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="tbQ-rd-Eca" secondAttribute="bottom" id="gAc-Ye-cVR"/>

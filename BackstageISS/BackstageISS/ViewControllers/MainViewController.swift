@@ -56,6 +56,7 @@ class MainViewController: UIViewController {
         
         self.mapView.delegate = self
         self.title = "ISS Tracker"
+        self.statusLabel.textColor = Colors.nasaBlue
     }
     
     override func viewDidAppear(_ animated: Bool) {
