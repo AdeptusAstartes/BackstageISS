@@ -8,6 +8,19 @@
 
 import Foundation
 
+/*
+ Please note that this is a very heavily modified and truncated version of how I would normally create and make API requests.
+ It relies on simple URLSession requests instead of Alamofire (which I would normally use) because I didn't want to get all crazy
+ with the dependencies here.  The scope is limited to GET requests since that's all we're doing
+ 
+ Please note that there are no checks for an active network connection before performing a request (they have been removed so as to not
+ add the addional complexity of Reachability code to the project) and the response handling has been greatly simplified as well.
+ 
+ There is a bunch of boiler plate code at the end to create query string parameterized GET requests cause I didn't want to just
+ construct a "string" with the qs params and make a url out of that.  I wanted to demonstrate a through understanding of working with
+ HTTP requests (well at least GETs) and not oversimplify things TOO much.
+ */
+
 class RequestManager {
     static let sharedRequestManager = RequestManager()
 
@@ -35,7 +48,6 @@ class RequestManagerResponse {
         self.response = response
         self.error = error
     }
-    
 }
 
 
@@ -76,22 +88,6 @@ class RequestManagerJSONResponse: RequestManagerResponse {
         self.data = data
     }
 }
-
-struct RequestManagerError: Error {
-    enum RequestManagerErrorType {
-        case noNetworkConnection
-        case unkown
-    }
-
-    var errorType: RequestManagerErrorType = .unkown
-
-    static func noNetworkConnectionError() -> RequestManagerError {
-        var error = RequestManagerError()
-        error.errorType = .noNetworkConnection
-        return error
-    }
-}
-
 
 struct URLUtils {
     static func jsonGETRequest(url: URL, queryStringParams:  [String: Any]? = nil, ignoreCaching: Bool = false) -> URLRequest {
