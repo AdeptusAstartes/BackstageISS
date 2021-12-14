@@ -23,7 +23,7 @@ class ISSPositionManager {
         }
     }
     
-    func getPredictedPosition(latitude: Float, longitude: Float, completion: @escaping (_ issPosition: ISSPosition) -> ()) {
+    func getPredictedPosition(latitude: Double, longitude: Double, completion: @escaping (_ issPosition: ISSPosition) -> ()) {
         RequestManager.getJSON(url: Config.issPredictedPositionAPIURL, parameters: ["lat": latitude, "lon": longitude]) { response in
             let issPosition = ISSPosition(predictedPositionJSON: response.jsonDict)
             completion(issPosition)

@@ -10,6 +10,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainViewController" customModule="BackstageISS" customModuleProvider="target">
             <connections>
                 <outlet property="mapView" destination="k6o-3n-39d" id="EgW-nT-9VP"/>
+                <outlet property="statusLabel" destination="tbQ-rd-Eca" id="9Og-RE-N2q"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -18,19 +19,31 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="k6o-3n-39d">
-                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsBuildings="NO" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k6o-3n-39d">
+                    <rect key="frame" x="0.0" y="44" width="414" height="773"/>
                 </mapView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tbQ-rd-Eca">
+                    <rect key="frame" x="15" y="817" width="384" height="45"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="GAX-yO-34t"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="k6o-3n-39d" secondAttribute="trailing" id="5mq-eE-cTG"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="k6o-3n-39d" secondAttribute="bottom" id="96X-k4-9ku"/>
+                <constraint firstItem="tbQ-rd-Eca" firstAttribute="top" secondItem="k6o-3n-39d" secondAttribute="bottom" id="5pI-lp-b3L"/>
+                <constraint firstItem="tbQ-rd-Eca" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="Ip2-zC-3ly"/>
                 <constraint firstItem="k6o-3n-39d" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="bdA-hD-gah"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="tbQ-rd-Eca" secondAttribute="bottom" id="gAc-Ye-cVR"/>
                 <constraint firstItem="k6o-3n-39d" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="oke-sh-Bje"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="tbQ-rd-Eca" secondAttribute="trailing" constant="15" id="u2h-PK-d6d"/>
             </constraints>
-            <point key="canvasLocation" x="139" y="136"/>
+            <point key="canvasLocation" x="137.68115942028987" y="135.9375"/>
         </view>
     </objects>
 </document>

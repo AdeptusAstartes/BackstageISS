@@ -8,7 +8,7 @@
 import Foundation
 
 struct ISSPosition: Codable {
-    var timestamp: Int = 0
+    var timestamp: Double = 0
     var latitude: Double = 0
     var longitude: Double = 0
     
@@ -17,7 +17,7 @@ struct ISSPosition: Codable {
     }
     
     init(currentPositionJSON: [String: Any?]) {
-        if let timestamp = currentPositionJSON["timestamp"] as? Int {
+        if let timestamp = currentPositionJSON["timestamp"] as? Double {
             self.timestamp = timestamp
         }
         
@@ -48,7 +48,7 @@ struct ISSPosition: Codable {
         }
         
         if let request = predictedPositionJSON["response"] as? [[String: Any]] {
-            if let timestamp = request.first?["risetime"] as? Int {
+            if let timestamp = request.first?["risetime"] as? Double {
                 self.timestamp = timestamp
             }
         }

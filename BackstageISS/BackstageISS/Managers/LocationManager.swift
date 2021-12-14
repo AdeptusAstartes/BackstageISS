@@ -58,6 +58,38 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         locationManager.requestLocation()
     }
     
+    func getCityForCoordinates(location: CLLocation?, completion: @escaping (_ locationName: String?) -> ()) {
+        guard let location = location else {
+            completion(nil)
+            return
+        }
+        
+        let geocoder = CLGeocoder()
+        geocoder.reverseGeocodeLocation(location) { placemarks, error in
+            if let placemarks = placemarks, let placemark = placemarks.last {
+                var text = ""
+                
+                if let locality = placemark.locality {
+                    text = "\(text)\(locality), "
+                }
+                
+                if let administrativeArea = placemark.administrativeArea {
+                    text = "\(text)\(administrativeArea), "
+                }
+                
+                if let country = placemark.country {
+                    text = "\(text)\(country)"
+                }
+                
+                if (text.isEmpty) {
+                    text = "Uninhabited Area"
+                }
+                
+                completion(text)
+            }
+        }
+    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         /*
         This is safe per the docs (and also we only want the last one if there are multiple locations because that is the latest).
