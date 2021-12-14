@@ -6,8 +6,13 @@
 //
 
 import UIKit
+import MapKit
 
 class MainViewController: UIViewController {
+    
+    // Using Apple Maps (MapKit) cause it's super easy and Google Maps is a huge objective-c mess.
+    @IBOutlet weak var mapView: MKMapView!
+    
     let locationManager: LocationManager
     
     init() {
@@ -22,6 +27,11 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.mapView.delegate = self
+        
+        self.navigationController?.navigationBar.barTintColor = .blue
+        self.title = "ISS"
     
     }
     
@@ -35,19 +45,48 @@ class MainViewController: UIViewController {
             self.locationManager.getCurrentLocation()
         }
         
-        ISSPositionManager.sharedISSLocationManager.getCurrentPosition()
-        ISSPositionManager.sharedISSLocationManager.getPredictedPosition(latitude: 40.712776, longitude: -74.005974)
+        ISSPositionManager.sharedISSLocationManager.getCurrentPosition { issPosition in
+            DispatchQueue.main.async {
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = CLLocationCoordinate2D(latitude: issPosition.latitude, longitude: issPosition.longitude)
+                annotation.title = "Current Location of ISS"
+                self.mapView.addAnnotation(annotation)
+                self.mapView.selectAnnotation(annotation, animated: true)
+                self.mapView.showAnnotations(self.mapView.annotations, animated: true)
+            }
+        }
+        //ISSPositionManager.sharedISSLocationManager.getPredictedPosition(latitude: 40.712776, longitude: -74.005974)
     }
-
-
 }
 
 extension MainViewController: LocationManagerDelegate {
     func didUpdateLocation(location: Location) {
-        print(location)
+        self.mapView.showsUserLocation = true
     }
     
     func userDidAllowLocationPermissions() {
         self.locationManager.getCurrentLocation()
     }
+}
+
+extension MainViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        guard annotation is MKPointAnnotation else {
+            return nil
+        }
+
+        let identifier = "Annotation"
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+
+        if (annotationView == nil) {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            annotationView?.image = UIImage(named: "iss")
+            annotationView!.canShowCallout = true
+        } else {
+            annotationView!.annotation = annotation
+        }
+
+        return annotationView
+    }
+
 }
