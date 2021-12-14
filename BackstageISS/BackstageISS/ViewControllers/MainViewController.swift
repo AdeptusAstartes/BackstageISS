@@ -105,6 +105,18 @@ class MainViewController: UIViewController {
 
         ISSPositionManager.sharedISSLocationManager.getPredictedPosition(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude) { issPosition in
             self.predictedISSPassTime = issPosition.timestamp
+            
+            UNUserNotificationCenter.current().getNotificationSettings { settings in
+                if (settings.authorizationStatus == .notDetermined) {
+                    NotificationManager.sharedNotificationManager.requestNotificationAuthorization { success in
+                        if (success) {
+                            NotificationManager.sharedNotificationManager.scheduleISSPassNotification(timestamp: issPosition.timestamp)
+                        }
+                    }
+                } else {
+                    NotificationManager.sharedNotificationManager.scheduleISSPassNotification(timestamp: issPosition.timestamp)
+                }
+            }
         }
     }
     

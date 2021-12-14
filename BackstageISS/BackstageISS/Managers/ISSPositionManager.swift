@@ -24,7 +24,10 @@ class ISSPositionManager {
     }
     
     func getPredictedPosition(latitude: Double, longitude: Double, completion: @escaping (_ issPosition: ISSPosition) -> ()) {
-        RequestManager.getJSON(url: Config.issPredictedPositionAPIURL, parameters: ["lat": latitude, "lon": longitude]) { response in
+        // We have to set n to 2 so that we get up to two predictions from the API because it has a weird bug
+        // where if the earliest prediction is too close to the current time it doesn't return any times at all.
+        // So ask for two and if we get more than one always take the first because that is the closest to now.
+        RequestManager.getJSON(url: Config.issPredictedPositionAPIURL, parameters: ["lat": latitude, "lon": longitude, "n": 2]) { response in
             let issPosition = ISSPosition(predictedPositionJSON: response.jsonDict)
             completion(issPosition)
         }
