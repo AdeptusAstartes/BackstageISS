@@ -16,14 +16,12 @@ import Foundation
  Please note that there are no checks for an active network connection before performing a request (they have been removed so as to not
  add the addional complexity of Reachability code to the project) and the response handling has been greatly simplified as well.
  
- There is a bunch of boiler plate code at the end to create query string parameterized GET requests cause I didn't want to just
+ There is a bunch of boilerplate code at the end to create query string parameterized GET requests cause I didn't want to just
  construct a "string" with the qs params and make a url out of that.  I wanted to demonstrate a through understanding of working with
  HTTP requests (well at least GETs) and not oversimplify things TOO much.
  */
 
 class RequestManager {
-    static let sharedRequestManager = RequestManager()
-
     static func getJSON(url: URL, parameters: [String: Any]? = nil, completion: @escaping (_ json: RequestManagerJSONResponse) -> ()) {
         let request = URLUtils.jsonGETRequest(url: url, queryStringParams: parameters)
         

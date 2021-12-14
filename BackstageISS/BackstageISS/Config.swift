@@ -12,5 +12,5 @@ struct Config {
     
     // Only using force unwrapped optionals here because there is zero chance of failure
     static let issCurrentLocationAPIURL = URL(string: Config.baseAPIURL + "/iss-now/")!
-    static let issPassAPIURL = URL(string: Config.baseAPIURL + "/iss/v1/")!
+    static let issPredictedPositionAPIURL = URL(string: Config.baseAPIURL + "/iss/v1/")!
 }

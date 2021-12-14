@@ -10,10 +10,10 @@
 		F206C1522768214200098136 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F206C1502768214200098136 /* MainViewController.swift */; };
 		F206C1532768214200098136 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F206C1512768214200098136 /* MainViewController.xib */; };
 		F206C1582768388900098136 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F206C1572768388900098136 /* MapKit.framework */; };
-		F206C15A27683DAD00098136 /* CurrentISSPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = F206C15927683DAD00098136 /* CurrentISSPosition.swift */; };
+		F206C15A27683DAD00098136 /* ISSPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = F206C15927683DAD00098136 /* ISSPosition.swift */; };
 		F206C15C2768454B00098136 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = F206C15B2768454B00098136 /* Config.swift */; };
 		F206C1602768473400098136 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F206C15F2768473400098136 /* RequestManager.swift */; };
-		F206C16227684D0000098136 /* ISSLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F206C16127684D0000098136 /* ISSLocationManager.swift */; };
+		F206C16227684D0000098136 /* ISSPositionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F206C16127684D0000098136 /* ISSPositionManager.swift */; };
 		F29F712B27681EFB00CF9F78 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29F712A27681EFB00CF9F78 /* AppDelegate.swift */; };
 		F29F713427681EFC00CF9F78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F29F713327681EFC00CF9F78 /* Assets.xcassets */; };
 		F29F713727681EFC00CF9F78 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F29F713527681EFC00CF9F78 /* LaunchScreen.storyboard */; };
@@ -23,10 +23,10 @@
 		F206C1502768214200098136 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		F206C1512768214200098136 /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		F206C1572768388900098136 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		F206C15927683DAD00098136 /* CurrentISSPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentISSPosition.swift; sourceTree = "<group>"; };
+		F206C15927683DAD00098136 /* ISSPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISSPosition.swift; sourceTree = "<group>"; };
 		F206C15B2768454B00098136 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		F206C15F2768473400098136 /* RequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
-		F206C16127684D0000098136 /* ISSLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISSLocationManager.swift; sourceTree = "<group>"; };
+		F206C16127684D0000098136 /* ISSPositionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISSPositionManager.swift; sourceTree = "<group>"; };
 		F29F712727681EFB00CF9F78 /* BackstageISS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BackstageISS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F29F712A27681EFB00CF9F78 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F29F713327681EFC00CF9F78 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,7 +49,7 @@
 		F206C14D2768210F00098136 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				F206C15927683DAD00098136 /* CurrentISSPosition.swift */,
+				F206C15927683DAD00098136 /* ISSPosition.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -67,7 +67,7 @@
 			isa = PBXGroup;
 			children = (
 				F206C15F2768473400098136 /* RequestManager.swift */,
-				F206C16127684D0000098136 /* ISSLocationManager.swift */,
+				F206C16127684D0000098136 /* ISSPositionManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -185,9 +185,9 @@
 			files = (
 				F206C1602768473400098136 /* RequestManager.swift in Sources */,
 				F29F712B27681EFB00CF9F78 /* AppDelegate.swift in Sources */,
-				F206C16227684D0000098136 /* ISSLocationManager.swift in Sources */,
+				F206C16227684D0000098136 /* ISSPositionManager.swift in Sources */,
 				F206C15C2768454B00098136 /* Config.swift in Sources */,
-				F206C15A27683DAD00098136 /* CurrentISSPosition.swift in Sources */,
+				F206C15A27683DAD00098136 /* ISSPosition.swift in Sources */,
 				F206C1522768214200098136 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
