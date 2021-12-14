@@ -16,17 +16,17 @@ import Foundation
 class ISSPositionManager {
     static let sharedISSLocationManager = ISSPositionManager()
     
-    func getCurrentPosition() {
-        RequestManager.getJSON(url: Config.issCurrentLocationAPIURL, parameters: nil) { response in
+    func getCurrentPosition(completion: @escaping (_ issPosition: ISSPosition) -> ()) {
+        RequestManager.getJSON(url: Config.issCurrentLocationAPIURL) { response in
             let issPosition = ISSPosition(currentPositionJSON: response.jsonDict)
-            print(issPosition)
+            completion(issPosition)
         }
     }
     
-    func getPredictedPosition(latitude: Float, longitude: Float) {
+    func getPredictedPosition(latitude: Float, longitude: Float, completion: @escaping (_ issPosition: ISSPosition) -> ()) {
         RequestManager.getJSON(url: Config.issPredictedPositionAPIURL, parameters: ["lat": latitude, "lon": longitude]) { response in
             let issPosition = ISSPosition(predictedPositionJSON: response.jsonDict)
-            print(issPosition)
+            completion(issPosition)
         }
     }
     
