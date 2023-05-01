@@ -15,12 +15,20 @@ import Foundation
  */
 class ISSPositionManager {
     static let sharedISSLocationManager = ISSPositionManager()
-    
+
+    // Closure-based version
     func getCurrentPosition(completion: @escaping (_ issPosition: ISSPosition) -> ()) {
         RequestManager.getJSON(url: Config.issCurrentLocationAPIURL) { response in
             let issPosition = ISSPosition(currentPositionJSON: response.jsonDict)
             completion(issPosition)
         }
+    }
+
+    // Swift concurrency version
+    func getCurrentPosition() async -> ISSPosition {
+        let response = await RequestManager.getJSON(url: Config.issCurrentLocationAPIURL)
+        let issPosition = ISSPosition(currentPositionJSON: response.jsonDict)
+        return issPosition
     }
     
     func getPredictedPosition(latitude: Double, longitude: Double, completion: @escaping (_ issPosition: ISSPosition) -> ()) {

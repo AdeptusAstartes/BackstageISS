@@ -68,7 +68,7 @@ class MainViewController: UIViewController {
         if (self.locationManager.shouldAskForLocationPermissions) {
             self.locationManager.requestLocationPermissions()
         }
-        
+
         self.getCurrentISSPosition()
         self.getNextISSPassTime()
     }
@@ -79,46 +79,56 @@ class MainViewController: UIViewController {
         }
 
         self.showActivityIndicator()
-        
-        ISSPositionManager.sharedISSLocationManager.getCurrentPosition { issPosition in
+
+        Task { [weak self] in
+            guard let self = self else {
+                return
+            }
+
+            let issPosition = await ISSPositionManager.sharedISSLocationManager.getCurrentPosition()
             self.currentISSPosition = CLLocation(latitude: issPosition.latitude, longitude: issPosition.longitude)
+
             self.locationManager.getCityForCoordinates(location: self.currentISSPosition) { locationName in
                 self.currentISSPositionName = locationName
             }
-            
-            DispatchQueue.main.async { [weak self] in
-                self?.hideActivityIndicator()
 
-                if let currentAnnotation = self?.currentAnnotation {
-                    mapView.removeAnnotation(currentAnnotation)
-                }
-                
-                let annotation = MKPointAnnotation()
-                annotation.coordinate = CLLocationCoordinate2D(latitude: issPosition.latitude, longitude: issPosition.longitude)
-                annotation.title = "Current Location of ISS"
-                mapView.addAnnotation(annotation)
-                mapView.selectAnnotation(annotation, animated: self?.currentAnnotation == nil)
-                self?.currentAnnotation = annotation
+            self.hideActivityIndicator()
 
-                // If we've panned away or we move the annotation out of view while just watching the track,
-                // re-center the map on the offscreen coordinate.
-                if (!mapView.visibleMapRect.contains(MKMapPoint(annotation.coordinate))) {
-                    mapView.setCenter(annotation.coordinate, animated: true)
-                }
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                    self?.getCurrentISSPosition()
-                }
+            if let currentAnnotation {
+                mapView.removeAnnotation(currentAnnotation)
+            }
+
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = CLLocationCoordinate2D(latitude: issPosition.latitude, longitude: issPosition.longitude)
+            annotation.title = "Current Location of ISS"
+            mapView.addAnnotation(annotation)
+            mapView.selectAnnotation(annotation, animated: self.currentAnnotation == nil)
+            self.currentAnnotation = annotation
+
+            // If we've panned away or we move the annotation out of view while just watching the track,
+            // re-center the map on the offscreen coordinate.
+            if (!mapView.visibleMapRect.contains(MKMapPoint(annotation.coordinate))) {
+                mapView.setCenter(annotation.coordinate, animated: true)
+            }
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [weak self] in
+                self?.getCurrentISSPosition()
             }
         }
     }
-    
-    private func getNextISSPassTime() {
-        let location = self.userLocation ?? CLLocation(latitude: 40.712776, longitude: -74.005974)
 
-        ISSPositionManager.sharedISSLocationManager.getPredictedPosition(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude) { issPosition in
+    /*
+     Creates a local notification that lets the user know when the ISS is passing over their
+     location based on the time predicted by the ISS API.
+     */
+    private func getNextISSPassTime() {
+        guard let userLocation else { // Hey look Swift 5.5!
+            return
+        }
+
+        ISSPositionManager.sharedISSLocationManager.getPredictedPosition(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude) { issPosition in
             self.predictedISSPassTime = issPosition.timestamp
-            
+
             UNUserNotificationCenter.current().getNotificationSettings { settings in
                 if (settings.authorizationStatus == .notDetermined) {
                     NotificationManager.sharedNotificationManager.requestNotificationAuthorization { success in
@@ -132,43 +142,43 @@ class MainViewController: UIViewController {
             }
         }
     }
-    
+
     private func updateStatusLabel() {
         var text = ""
-        
+
         if let userLocationName = self.userLocationName {
             text = "\(text)User Location: \(userLocationName)\n"
         }
-        
+
         if let currentISSPositionName = self.currentISSPositionName {
             text = "\(text)Current ISS Location: \(currentISSPositionName)\n"
         }
-        
+
         if (self.predictedISSPassTime != 0) {
             text = "\(text)ISS Will Be Over You at \(self.formatDate(timestamp: self.predictedISSPassTime))\n"
         }
-        
+
         DispatchQueue.main.async {
             self.statusLabel.text = text
         }
     }
-    
+
     private func showActivityIndicator() {
         guard self.acitivityIndicatorView == nil else {
             return
         }
-        
+
         self.acitivityIndicatorView = UIActivityIndicatorView(style: .large)
         self.acitivityIndicatorView?.center = self.view.center
         self.view.addSubview(self.acitivityIndicatorView!)
         self.acitivityIndicatorView?.startAnimating()
     }
-    
+
     private func hideActivityIndicator() {
         self.acitivityIndicatorView?.removeFromSuperview()
         self.acitivityIndicatorView = nil
     }
-    
+
     private func formatDate(timestamp: Double) -> String {
         self.dateFormatter.dateStyle = .short
         self.dateFormatter.timeStyle = .short

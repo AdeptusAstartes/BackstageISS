@@ -32,6 +32,17 @@ class RequestManager {
         
         sessionTask.resume()
     }
+
+    static func getJSON(url: URL, parameters: [String: Any]? = nil) async -> RequestManagerJSONResponse {
+        let request = URLUtils.jsonGETRequest(url: url, queryStringParams: parameters)
+
+        do {
+            let (data, response) = try await URLSession.shared.data(for: request)
+            return RequestManagerJSONResponse(data: data, response: response as? HTTPURLResponse, error: nil)
+        } catch {
+            return RequestManagerJSONResponse(data: nil, response: nil, error: error)
+        }
+    }
 }
 
 class RequestManagerResponse {
