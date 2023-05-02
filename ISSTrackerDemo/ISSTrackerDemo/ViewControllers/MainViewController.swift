@@ -158,8 +158,8 @@ class MainViewController: UIViewController {
             text = "\(text)ISS Will Be Over You at \(self.formatDate(timestamp: self.predictedISSPassTime))\n"
         }
 
-        DispatchQueue.main.async {
-            self.statusLabel.text = text
+        DispatchQueue.main.async { [weak self] in
+            self?.statusLabel.text = text
         }
     }
 
