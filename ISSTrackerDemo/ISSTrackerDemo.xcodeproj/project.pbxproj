@@ -35,7 +35,7 @@
 		F206C16627686B0F00098136 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		F206C16A2769118D00098136 /* nasalization.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = nasalization.ttf; sourceTree = "<group>"; };
 		F206C16C2769435C00098136 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
-		F29F712727681EFB00CF9F78 /* BackstageISS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BackstageISS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F29F712727681EFB00CF9F78 /* ISSTrackerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ISSTrackerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F29F712A27681EFB00CF9F78 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F29F713327681EFC00CF9F78 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F29F713627681EFC00CF9F78 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -101,7 +101,7 @@
 		F29F711E27681EFB00CF9F78 = {
 			isa = PBXGroup;
 			children = (
-				F29F712927681EFB00CF9F78 /* BackstageISS */,
+				F29F712927681EFB00CF9F78 /* ISSTrackerDemo */,
 				F29F712827681EFB00CF9F78 /* Products */,
 				F206C1562768388900098136 /* Frameworks */,
 			);
@@ -110,12 +110,12 @@
 		F29F712827681EFB00CF9F78 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F29F712727681EFB00CF9F78 /* BackstageISS.app */,
+				F29F712727681EFB00CF9F78 /* ISSTrackerDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F29F712927681EFB00CF9F78 /* BackstageISS */ = {
+		F29F712927681EFB00CF9F78 /* ISSTrackerDemo */ = {
 			isa = PBXGroup;
 			children = (
 				F206C16A2769118D00098136 /* nasalization.ttf */,
@@ -129,15 +129,15 @@
 				F29F713827681EFC00CF9F78 /* Info.plist */,
 				F206C15B2768454B00098136 /* Config.swift */,
 			);
-			path = BackstageISS;
+			path = ISSTrackerDemo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F29F712627681EFB00CF9F78 /* BackstageISS */ = {
+		F29F712627681EFB00CF9F78 /* ISSTrackerDemo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F29F713B27681EFC00CF9F78 /* Build configuration list for PBXNativeTarget "BackstageISS" */;
+			buildConfigurationList = F29F713B27681EFC00CF9F78 /* Build configuration list for PBXNativeTarget "ISSTrackerDemo" */;
 			buildPhases = (
 				F29F712327681EFB00CF9F78 /* Sources */,
 				F29F712427681EFB00CF9F78 /* Frameworks */,
@@ -147,9 +147,9 @@
 			);
 			dependencies = (
 			);
-			name = BackstageISS;
-			productName = BackstageISS;
-			productReference = F29F712727681EFB00CF9F78 /* BackstageISS.app */;
+			name = ISSTrackerDemo;
+			productName = ISSTrackerDemo;
+			productReference = F29F712727681EFB00CF9F78 /* ISSTrackerDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -167,7 +167,7 @@
 					};
 				};
 			};
-			buildConfigurationList = F29F712227681EFB00CF9F78 /* Build configuration list for PBXProject "BackstageISS" */;
+			buildConfigurationList = F29F712227681EFB00CF9F78 /* Build configuration list for PBXProject "ISSTrackerDemo" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -180,7 +180,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F29F712627681EFB00CF9F78 /* BackstageISS */,
+				F29F712627681EFB00CF9F78 /* ISSTrackerDemo */,
 			);
 		};
 /* End PBXProject section */
@@ -355,10 +355,12 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = LLA58C9497;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = BackstageISS/Info.plist;
+				INFOPLIST_FILE = ISSTrackerDemo/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app uses your location to determine when the ISS will pass over it.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = LaunchScreen;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -366,7 +368,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.donangelillo.backstageISS.BackstageISS;
+				PRODUCT_BUNDLE_IDENTIFIER = com.donangelillo.ISSTrackerDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -383,10 +385,12 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = LLA58C9497;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = BackstageISS/Info.plist;
+				INFOPLIST_FILE = ISSTrackerDemo/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app uses your location to determine when the ISS will pass over it.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = LaunchScreen;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -394,7 +398,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.donangelillo.backstageISS.BackstageISS;
+				PRODUCT_BUNDLE_IDENTIFIER = com.donangelillo.ISSTrackerDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -405,7 +409,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F29F712227681EFB00CF9F78 /* Build configuration list for PBXProject "BackstageISS" */ = {
+		F29F712227681EFB00CF9F78 /* Build configuration list for PBXProject "ISSTrackerDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F29F713927681EFC00CF9F78 /* Debug */,
@@ -414,7 +418,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F29F713B27681EFC00CF9F78 /* Build configuration list for PBXNativeTarget "BackstageISS" */ = {
+		F29F713B27681EFC00CF9F78 /* Build configuration list for PBXNativeTarget "ISSTrackerDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F29F713C27681EFC00CF9F78 /* Debug */,
