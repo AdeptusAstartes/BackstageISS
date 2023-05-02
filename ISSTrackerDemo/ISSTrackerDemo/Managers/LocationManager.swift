@@ -57,6 +57,21 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     func getCurrentLocation() {
         locationManager.requestLocation()
     }
+
+    func getCityForCoordinates(location: CLLocation?) async -> String {
+        guard let location = location else {
+            return ""
+        }
+
+        let geocoder = CLGeocoder()
+
+        do {
+            let placemarks = try await geocoder.reverseGeocodeLocation(location)
+            return self.stringFor(placemarks: placemarks, error: nil)
+        } catch {
+            return ""
+        }
+    }
     
     func getCityForCoordinates(location: CLLocation?, completion: @escaping (_ locationName: String?) -> ()) {
         guard let location = location else {
@@ -65,29 +80,33 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         }
         
         let geocoder = CLGeocoder()
-        geocoder.reverseGeocodeLocation(location) { placemarks, error in
-            if let placemarks = placemarks, let placemark = placemarks.last {
-                var text = ""
-                
-                if let locality = placemark.locality {
-                    text = "\(text)\(locality), "
-                }
-                
-                if let administrativeArea = placemark.administrativeArea {
-                    text = "\(text)\(administrativeArea), "
-                }
-                
-                if let country = placemark.country {
-                    text = "\(text)\(country)"
-                }
-                
-                if (text.isEmpty) {
-                    text = "Uninhabited Area"
-                }
-                
-                completion(text)
+        geocoder.reverseGeocodeLocation(location) { [weak self] placemarks, error in
+            completion(self?.stringFor(placemarks: placemarks, error: error))
+        }
+    }
+
+    private func stringFor(placemarks: [CLPlacemark]?, error: Error?) -> String {
+        var text = ""
+
+        if let placemarks = placemarks, let placemark = placemarks.last {
+            if let locality = placemark.locality {
+                text = "\(text)\(locality), "
+            }
+
+            if let administrativeArea = placemark.administrativeArea {
+                text = "\(text)\(administrativeArea), "
+            }
+
+            if let country = placemark.country {
+                text = "\(text)\(country)"
+            }
+
+            if (text.isEmpty) {
+                text = "Uninhabited Area"
             }
         }
+
+        return text
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
